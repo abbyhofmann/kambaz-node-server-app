@@ -18,7 +18,7 @@ app.use(cors({
 const sessionOptions = {
     secret: process.env.SESSION_SECRET || "kambaz",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
 };
 if (process.env.NODE_ENV !== "development") {
     sessionOptions.proxy = true;
