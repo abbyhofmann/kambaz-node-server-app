@@ -19,15 +19,20 @@ const sessionOptions = {
     secret: process.env.SESSION_SECRET || "kambaz",
     resave: false,
     saveUninitialized: false,
+    cookie: {
+        secure: true,
+        sameSite: "none",
+        httpOnly: true
+    }
 };
-// if (process.env.NODE_ENV !== "development") {
-sessionOptions.proxy = true;
-sessionOptions.cookie = {
-    sameSite: "none",
-    secure: true,
-    domain: process.env.NODE_SERVER_DOMAIN,
-};
-// }
+if (process.env.NODE_ENV !== "development") {
+    sessionOptions.proxy = true;
+    sessionOptions.cookie = {
+        sameSite: "none",
+        secure: true,
+        domain: process.env.NODE_SERVER_DOMAIN,
+    };
+}
 app.use(session(sessionOptions));
 app.use(express.json());
 UserRoutes(app);
