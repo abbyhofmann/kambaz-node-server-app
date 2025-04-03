@@ -23,7 +23,11 @@ export default function UserRoutes(app) {
         res.json(users);
     };
 
-    const findUserById = (req, res) => { };
+    const findUserById = async (req, res) => {
+        const user = await dao.findUserById(req.params.userId);
+        res.json(user);
+    };
+
     const updateUser = (req, res) => {
         const userId = req.params.userId;
         const userUpdates = req.body;
@@ -87,8 +91,6 @@ export default function UserRoutes(app) {
 
     const createCourse = (req, res) => {
         const currentUser = req.session["currentUser"];
-        console.log('currentUser: ', currentUser);
-        console.log("Full session object:", req.session);
         const newCourse = courseDao.createCourse(req.body);
         enrollmentsDao.enrollUserInCourse(currentUser._id, newCourse._id);
         res.json(newCourse);
