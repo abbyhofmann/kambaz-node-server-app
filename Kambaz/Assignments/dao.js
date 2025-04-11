@@ -17,4 +17,3 @@ export function deleteAssignment(assignmentId) {
 export function updateAssignment(assignmentId, assignmentUpdates) {
     return model.updateOne({ _id: assignmentId }, { $set: assignmentUpdates });
 }
-
